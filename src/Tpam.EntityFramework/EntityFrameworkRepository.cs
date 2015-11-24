@@ -18,6 +18,16 @@ namespace Tpam.EntityFramework
             throw new NotImplementedException();
         }
 
+        ReadRepositoryFacade<T, TKey> IReadRepository<T>.Facade<TKey>(Expression<Func<T, TKey>> keySelector)
+        {
+            throw new NotImplementedException();
+        }
+
+        RepositoryFacade<T, TKey> IRepository<T>.Facade<TKey>(Expression<Func<T, TKey>> keySelector)
+        {
+            throw new NotImplementedException();
+        }
+
         IEnumerable<T> IReadRepository<T>.Fetch()
         {
             throw new NotImplementedException();

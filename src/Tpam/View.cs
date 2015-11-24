@@ -8,25 +8,28 @@ namespace Tpam
 {
     public abstract class View<T>
     {
-        private readonly T _t;
+        protected IReadRepository<T> Repository { get; private set; }
 
-        public View(T t)
+        public View()
         {
-            _t = t;
             Serializer = o => Task.Factory.StartNew<string>(() => JsonConvert.SerializeObject(o));
-
         }
 
-        public View(T t, Func<T, Task<string>> serializer) : this(t)
+        public View(Func<T, Task<string>> serializer)
         {
             Serializer = serializer;
         }
 
         protected virtual Func<T, Task<string>> Serializer { get; set; }
 
-        protected async virtual Task<string> Present()
+        protected async virtual Task<string> Present(T t)
         {
-            return await Serializer(_t);
+            return await Serializer(t);
+        }
+
+        protected async virtual Task<string> PresentMany(IEnumerable<T> ts)
+        {
+            throw new NotImplementedException();
         }
     }
 }

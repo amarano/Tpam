@@ -12,7 +12,9 @@
     "System.Threading": "4.0.10-beta-23019",
     "System.Runtime": "4.0.10-beta-23019",
     "Microsoft.CSharp": "4.0.0-beta-23019",
-    "Tpam": "1.0.0-*"
+    "Tpam": "1.0.0-*",
+    "EntityFramework.Core": "7.0.0-rc1-final", 
+    "EntityFramework.Sqlite": "7.0.0-rc1-final",
   },
 
   "frameworks": {

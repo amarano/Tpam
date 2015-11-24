@@ -12,19 +12,32 @@ namespace Tpam
         bool Update<TKey>(T t, Expression<Func<T, TKey>> keySelector);
         bool Delete(T t);
 
+        new RepositoryFacade<T, TKey> Facade<TKey>(Expression<Func<T, TKey>> keySelector); 
     }
 
     public interface IReadRepository<T>
     {
         IEnumerable<T> Fetch();
         T Fetch<TKey>(TKey key, Expression<Func<T, TKey>> keySelector);
-        IEnumerable<T> Where(Expression<Func<T, bool>> predicate); 
+        IEnumerable<T> Where(Expression<Func<T, bool>> predicate);
+
+        ReadRepositoryFacade<T, TKey> Facade<TKey>(Expression<Func<T, TKey>> keySelector);
+    }
+
+    public class RepositoryFacade<T, TKey> : ReadRepositoryFacade<T, TKey>
+    {
+        protected new readonly IRepository<T> _repository;
+
+        public RepositoryFacade(IRepository<T> repository, Expression<Func<T, TKey>> keySelector) : base(repository, keySelector)
+        {
+
+        }
     }
 
     public class ReadRepositoryFacade<T, TKey> 
     {
-        private readonly IReadRepository<T> _repository;
-        private readonly Expression<Func<T, TKey>> _keySelector;
+        protected readonly IReadRepository<T> _repository;
+        protected readonly Expression<Func<T, TKey>> _keySelector;
 
         public ReadRepositoryFacade(IReadRepository<T> repository, Expression<Func<T, TKey>> keySelector)
         {
@@ -40,6 +53,11 @@ namespace Tpam
         public virtual T Fetch(TKey id)
         {
             return _repository.Fetch(id, _keySelector);
+        }
+
+        public virtual IEnumerable<T> Fetch(Expression<Func<T, bool>> predicate)
+        {
+            return _repository.Where(predicate);
         }
 
     }
