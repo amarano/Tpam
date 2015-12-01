@@ -8,22 +8,7 @@ namespace Tpam.EntityFramework
 {
     public class EntityFrameworkRepository<Tkey, T> : IRepository<T>, IReadRepository<T>
     {
-        public EntityFrameworkRepository()
-        {
-
-        }
-
         bool IRepository<T>.Delete(T t)
-        {
-            throw new NotImplementedException();
-        }
-
-        ReadRepositoryFacade<T, TKey> IReadRepository<T>.Facade<TKey>(Expression<Func<T, TKey>> keySelector)
-        {
-            throw new NotImplementedException();
-        }
-
-        RepositoryFacade<T, TKey> IRepository<T>.Facade<TKey>(Expression<Func<T, TKey>> keySelector)
         {
             throw new NotImplementedException();
         }
@@ -33,17 +18,17 @@ namespace Tpam.EntityFramework
             throw new NotImplementedException();
         }
 
-        T IReadRepository<T>.Fetch<TKey>(TKey key, Expression<Func<T, TKey>> keySelector)
+        T IReadRepository<T>.Fetch(Guid key)
         {
             throw new NotImplementedException();
         }
 
-        TKey IRepository<T>.Save<TKey>(T t, Expression<Func<T, TKey>> keySelector)
+        Guid IRepository<T>.Save(T t)
         {
             throw new NotImplementedException();
         }
 
-        bool IRepository<T>.Update<TKey>(T t, Expression<Func<T, TKey>> keySelector)
+        bool IRepository<T>.Update(Guid id, T t)
         {
             throw new NotImplementedException();
         }

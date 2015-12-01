@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Tpam.Domain;
 using Xunit;
 
 namespace Tpam.Tests
@@ -11,10 +12,18 @@ namespace Tpam.Tests
     public class Class1
     {
 
+        public class TestClass : EntityBase
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public int Age { get; set; }
+        }
+
+
         [Fact]
         public void UniTest1()
         {
-            Assert.True(true);
+            var view = new ReadOnlyView<TestClass>();
         }
     }
 }

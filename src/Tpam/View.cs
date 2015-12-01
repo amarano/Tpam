@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Tpam.Domain;
 
 namespace Tpam
 {
-    public abstract class View<T>
+    public abstract class View<T> where T : EntityBase
     {
         protected IReadRepository<T> Repository { get; private set; }
 
@@ -43,5 +44,9 @@ namespace Tpam
         {
             return await CollectionSerializer(ts);
         }
+    } 
+
+    public class ReadOnlyView<T> : View<T> where T : EntityBase
+    {
     }
 }
